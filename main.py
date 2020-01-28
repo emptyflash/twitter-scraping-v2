@@ -1,5 +1,7 @@
-import requests
+import json
 import datetime
+
+import requests
 
 from bs4 import BeautifulSoup
 
@@ -99,9 +101,9 @@ def get_all_tweets(username, start, end, step=datetime.timedelta(days=90)):
 
 if __name__ == "__main__":
     username = "emptyflash"
-    start = datetime.date(2019, 1, 1)
-    end = datetime.date(2020, 1, 1)
+    start = datetime.date(2009, 9, 1)
+    end = datetime.date.today()
     tweets = get_all_tweets(username, start, end)
-    print(sorted(tweets, key=lambda t: t["favorite_count"], reverse=True)[0])
-    print(sorted(tweets, key=lambda t: t["retweet_count"], reverse=True)[0])
     import pdb; pdb.set_trace()
+    with open(f"{username}.json", 'w') as outfile:
+        json.dump(tweets, outfile)
